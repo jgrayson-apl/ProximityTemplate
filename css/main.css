@@ -1,0 +1,154 @@
+html, body {
+  width       : 100%;
+  height      : 100%;
+  margin      : 0;
+  padding     : 0;
+  font-family : "Trebuchet MS", "Segoe UI", Helvetica, sans-serif;
+}
+
+#mainContainer {
+  width  : 100%;
+  height : 100%;
+}
+
+#mainContainer .dijitContentPane {
+  border : none !important;
+}
+
+#optionsContainer {
+  width : 25%;
+}
+
+#topOptionsPane {
+  height : 25%;
+}
+
+#titleNode {
+  font-size     : x-large;
+  border-bottom : solid 2px gray;
+}
+
+#descriptionNode {
+  margin    : 15px;
+  font-size : 0.9em;
+  color     : #555;
+}
+
+#mapPane {
+  padding : 0;
+}
+
+.esriScalebarLabel {
+  color       : white;
+  text-shadow : 1px 1px 0 black;
+  font-size   : larger;
+}
+
+.esriAttribution {
+  padding       : 3px;
+  border-radius : 3px;
+
+}
+
+.esriAttributionOpen {
+  padding          : 5px;
+  font-size        : larger;
+  color            : white;
+  background-color : gray;
+  text-shadow      : 1px 1px 0 black;
+}
+
+#legendPane {
+  position         : absolute;
+  top              : 60px;
+  left             : 20px;
+  z-index          : 50;
+  min-width        : 150px;
+  padding          : 20px;
+  background-color : white;
+  border           : solid 1px silver;
+  box-shadow       : 0 0 6px gray;
+  border-radius    : 6px;
+}
+
+#layerToggleNode {
+  padding     : 10px 10px 10px 0;
+  font-weight : bolder;
+}
+
+.esriLegendService {
+  margin-left : 20px;
+}
+
+.esriLegendLayer {
+  margin-left : 10px;
+}
+
+.parameterPane {
+  border      : solid 1px silver;
+  margin      : 10px;
+  padding     : 5px;
+  font-weight : bolder;
+}
+
+.parameterDetails {
+  margin    : 5px;
+  padding   : 5px;
+  font-size : 0.75em;
+  color     : #999;
+}
+
+#basemapPane {
+  position : absolute;
+  left     : 90px;
+  top      : 20px;
+  z-Index  : 100;
+}
+
+/*#proximityChartPane {
+  position      : absolute;
+  left          : 20px;
+  top           : 60px;
+  z-Index       : 99;
+  border        : solid 1px silver;
+  box-shadow    : 0 0 6px gray;
+  border-radius : 6px;
+}*/
+
+#proximityChartNode {
+  width            : 100%;
+  height           : 300px;
+  margin           : 0 auto 0 auto;
+  background-color : white;
+}
+
+.streetView {
+  width  : 350px;
+  height : 350px;
+}
+
+.streetView-error {
+  width            : 500px;
+  height           : 60px;
+  padding          : 30px;
+  background-color : rgba(255, 255, 255, 0.5);
+  color            : darkred;
+  font-size        : 1.5em;
+  font-weight      : bolder;
+}
+
+.messages {
+  min-width  : 400px;
+  min-height : 200px;
+}
+
+.message-info {
+  padding   : 5px;
+  font-size : 2em;
+}
+
+.message-action {
+  padding    : 3px;
+  color      : gray;
+  font-style : italic;
+}
