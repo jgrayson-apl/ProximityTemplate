@@ -22,7 +22,7 @@ define([
     _searchExtent: null,
     _maxDistanceMeters: null,
     _maxItemCount: 1000,
-    _queue: [],
+    _workerQueue: [],
 
     /**
      *
@@ -159,10 +159,10 @@ define([
     _updateProximity: function () {
 
       if(this._calculatingProximityDeferred && (!this._calculatingProximityDeferred.isFulfilled())) {
-        console.log("Cancelling pending proximity calculation...");
-        this.emit("update-cancel", {});
-        this._calculatingProximityDeferred.cancel("Another calculation has been requested...");
+        this._clearWorkerQueue();
+        this._calculatingProximityDeferred.cancel();
         this._calculatingProximityDeferred = null;
+        this.emit("update-cancel", {});
       }
 
       this.emit("update-start", {});
@@ -180,16 +180,17 @@ define([
      */
     _calculateProximity: function () {
 
-      // WORKER PROCESSES //
-      var processes = [];
-
       // DEFERRED //
-      var deferred = new Deferred(lang.hitch(this, function (reason) {
-        this._clearWorkerQueue();
-        deferred.reject("Workers cancelled: " + reason);
-      }));
+      var deferred = new Deferred();
+      /*lang.hitch(this, function (reason) {
+       console.warn("Proximity calculation cancelled: ", reason);
+       //this._clearWorkerQueue();
+       }));*/
 
       if(this._source && this._targets && this._maxDistanceMeters) {
+
+        // WORKER PROCESSES //
+        var processes = [];
 
         // START TIME //
         var startTime = (new Date()).valueOf();
@@ -240,12 +241,12 @@ define([
      * @private
      */
     _clearWorkerQueue: function () {
-      for (var startIndex in this._queue) {
-        if(this._queue.hasOwnProperty(startIndex)) {
-          this._queue[startIndex].terminate();
-        }
-      }
-      this._queue = [];
+      Object.keys(this._workerQueue).forEach(lang.hitch(this, function (startIndex) {
+        var workerClient = this._workerQueue[startIndex];
+        Object.keys(workerClient._queue).forEach(lang.hitch(this, function (id) {
+          workerClient._queue[id].cancel();
+        }));
+      }));
     },
 
     /**
@@ -258,9 +259,9 @@ define([
     _processData: function (startIndex, endIndex) {
 
       // WORKER //
-      var workerClient = this._queue[startIndex];
+      var workerClient = this._workerQueue[startIndex];
       if(!workerClient) {
-        workerClient = this._queue[startIndex] = new WorkerClient("application/Proximity/ProximityWorker", true);
+        workerClient = this._workerQueue[startIndex] = new WorkerClient("application/Proximity/ProximityWorker", true);
       }
 
       // INPUTS //

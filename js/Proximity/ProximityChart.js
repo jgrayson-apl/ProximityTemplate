@@ -468,7 +468,7 @@ define([
       // GROUPS //
       var maxFrequency = 0;
       var distanceStep = Math.round(this.distanceMeters / this.radiusSteps);
-      array.forEach(nearTable, lang.hitch(this, function (nearData) {
+      array.forEach(this.nearTable, lang.hitch(this, function (nearData) {
         // NEAR VALUES //
         var azimuth = +nearData[this.azimuthFieldName] || +nearData.attributes[this.azimuthFieldName];
         var distance = +nearData[this.distanceFieldName] || +nearData.attributes[this.distanceFieldName];
