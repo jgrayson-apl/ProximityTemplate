@@ -3,7 +3,7 @@ html, body {
   height      : 100%;
   margin      : 0;
   padding     : 0;
-  font-family : "Trebuchet MS", "Segoe UI", Helvetica, sans-serif;
+  font-family : Helvetica, "Trebuchet MS", "Segoe UI", sans-serif;
 }
 
 #mainContainer {
@@ -20,7 +20,7 @@ html, body {
 }
 
 #topOptionsPane {
-  height : 25%;
+  height : 300px;
 }
 
 #titleNode {
@@ -38,24 +38,13 @@ html, body {
   padding : 0;
 }
 
-.esriScalebarLabel {
-  color       : white;
-  text-shadow : 1px 1px 0 black;
-  font-size   : larger;
-}
 
-.esriAttribution {
-  padding       : 3px;
-  border-radius : 3px;
-
-}
-
-.esriAttributionOpen {
+#pan-button-pane {
+  position         : absolute;
+  top              : 10px;
+  left             : 90px;
+  z-index          : 50;
   padding          : 5px;
-  font-size        : larger;
-  color            : white;
-  background-color : gray;
-  text-shadow      : 1px 1px 0 black;
 }
 
 #legendPane {
@@ -67,8 +56,7 @@ html, body {
   padding          : 20px;
   background-color : white;
   border           : solid 1px silver;
-  box-shadow       : 0 0 6px gray;
-  border-radius    : 6px;
+  box-shadow       : 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 #layerToggleNode {
@@ -100,7 +88,7 @@ html, body {
 
 #basemapPane {
   position : absolute;
-  left     : 90px;
+  left     : 220px;
   top      : 20px;
   z-Index  : 100;
 }
@@ -112,7 +100,6 @@ html, body {
   z-Index       : 99;
   border        : solid 1px silver;
   box-shadow    : 0 0 6px gray;
-  border-radius : 6px;
 }*/
 
 #proximityChartNode {

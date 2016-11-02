@@ -26,14 +26,20 @@ define([
   "esri/symbols/SimpleLineSymbol",
   "esri/symbols/SimpleFillSymbol",
   "esri/graphic",
+  "esri/geometry/Point",
   "esri/geometry/Circle",
   "esri/geometry/webMercatorUtils",
   "esri/tasks/LinearUnit",
   "esri/units",
   "dojo/i18n!esri/nls/jsapi",
   "application/Proximity/ProximityChart",
-  "application/Proximity/ProximityIndex"
-], function (ready, declare, lang, array, on, dom, domClass, domGeom, keys, Color, colors, gfx, registry, Dialog, query, put, esriConfig, arcgisUtils, SnappingManager, Scalebar, Legend, BasemapGallery, OverviewMap, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Graphic, Circle, webMercatorUtils, LinearUnit, Units, esriBundle, ProximityChart, ProximityIndex) {
+  "application/Proximity/ProximityIndex",
+  "widgets/PanRoam"
+], function (ready, declare, lang, array, on, dom, domClass, domGeom, keys, Color, colors, gfx,
+             registry, Dialog, query, put,
+             esriConfig, arcgisUtils, SnappingManager, Scalebar, Legend, BasemapGallery, OverviewMap,
+             SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Graphic, Point, Circle, webMercatorUtils, LinearUnit, Units,
+             esriBundle, ProximityChart, ProximityIndex, PanRoam) {
 
   return declare(null, {
 
@@ -65,8 +71,12 @@ define([
           this.item = response.itemInfo.item;
           this.webmap = response.itemInfo.itemData;
 
-          this.map.on("update-start", lang.hitch(this.map, this.map.setMapCursor, "wait"));
-          this.map.on("update-end", lang.hitch(this.map, this.map.setMapCursor, "default"));
+          //this.map.on("update-start", lang.hitch(this.map, this.map.setMapCursor, "wait"));
+          //this.map.on("update-end", lang.hitch(this.map, this.map.setMapCursor, "default"));
+
+          // PAN ROAM BUTTON //
+          var panRoamBtn = new PanRoam({ map: this.map }, "pan-button-node");
+          panRoamBtn.startup();
 
           // TITLE AND DESCRIPTION //
           dom.byId('titleNode').innerHTML = this.item.title || "[No Title]";
@@ -86,18 +96,18 @@ define([
           });
 
           // LEGEND //
-          var legend = new Legend({
+         /* var legend = new Legend({
             map: this.map,
             layerInfos: arcgisUtils.getLegendLayers(response)
           }, "legendNode");
-          legend.startup();
+          legend.startup();*/
 
           // BASEMAP GALLERY //
-          var basemapGallery = new BasemapGallery({
+         /* var basemapGallery = new BasemapGallery({
             showArcGISBasemaps: true,
             map: this.map
           }, "basemapGalleryNode");
-          basemapGallery.startup();
+          basemapGallery.startup();*/
 
           // OVERVIEW MAP //
           this.overviewMap = new OverviewMap({
@@ -181,6 +191,16 @@ define([
 
             }));
 
+            // USE PAN/ROAM BUTTON UPDATE LOCATION AS SOURCE OF PROXIMITY ANALYSIS //
+            if(panRoamBtn) {
+              panRoamBtn.on("update", lang.hitch(this, function (evt) {
+                this.proximityIndex.setSource(evt.mapPoint);
+              }));
+              panRoamBtn.on("change", lang.hitch(this, function (evt) {
+                this.proximityIndex.setSource(this.map);
+              }));
+            }
+
           }));
 
         }), lang.hitch(this, function (error) {
@@ -235,11 +255,11 @@ define([
     displayMessage: function (infoMessage, actionMessage) {
 
       var contentPane = put("div.dijitDialogPaneContentArea");
-      put(contentPane, "div.message-info", {innerHTML: infoMessage || ""});
+      put(contentPane, "div.message-info", { innerHTML: infoMessage || "" });
 
       var actionBar = put(contentPane, "div.dijitDialogPaneActionBar");
       if(actionMessage) {
-        put(actionBar, "div.message-action", {innerHTML: actionMessage});
+        put(actionBar, "div.message-action", { innerHTML: actionMessage });
       }
 
       var messageDlg = new Dialog({
@@ -252,7 +272,6 @@ define([
     }
 
   });
-})
-;
+});
 
 

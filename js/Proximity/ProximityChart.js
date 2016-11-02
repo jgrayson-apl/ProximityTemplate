@@ -14,7 +14,8 @@ define([
   "dojo/on",
   "dojo/aspect",
   "dojox/gfx"
-], function (declare, Evented, lang, array, Color, colors, number, dom, domGeom, registry, Tooltip, mouse, on, aspect, gfx) {
+], function (declare, Evented, lang, array, Color, colors, number, dom, domGeom,
+             registry, Tooltip, mouse, on, aspect, gfx) {
 
   /**
    *
@@ -54,17 +55,20 @@ define([
     slices: [],
 
     // DEFAULT STROKES //
-    minorStroke: {color: "#ccc", style: "solid", width: 1},
-    majorStroke: {color: "#333", style: "solid", width: 2},
-    animateStroke: {color: Color.named.orange, style: "solid", width: 6},
+    //minorStroke: { color: "#ccc", style: "solid", width: 1 },
+    //majorStroke: { color: "#333", style: "solid", width: 2 },
+    minorStroke: { color: "#efefef", style: "solid", width: 1 },
+    majorStroke: { color: "#ccc", style: "solid", width: 2 },
+    animateStroke: { color: Color.named.orange, style: "solid", width: 6 },
 
     // DEFAULT FONTS //
-    smallFont: {family: "Tahoma", style: "bold", size: "7pt"},
-    minorFont: {family: "Tahoma", style: "bold", size: "9pt"},
-    majorFont: {family: "Tahoma", style: "bold", size: "14pt"},
-    busyFont: {family: "Tahoma", style: "italic", size: "12pt"},
+    smallFont: { family: "Helvetica", style: "bold", size: "7pt" },
+    minorFont: { family: "Helvetica", style: "bold", size: "9pt" },
+    majorFont: { family: "Helvetica", style: "bold", size: "14pt" },
+    busyFont: { family: "Helvetica", style: "italic", size: "12pt" },
 
     // DEFAULT COLOR VALUES //
+    textColor: "#333",
     fromFillColor: "#ffe4ea",
     toFillColor: Color.named.red,
     fromStrokeColor: Color.named.salmon,
@@ -194,7 +198,6 @@ define([
       };
     },
 
-
     /**
      *
      * @param azimuth
@@ -217,7 +220,7 @@ define([
         y: (this.titleBoxHeight * 0.5),
         align: "middle",
         text: this.title
-      }).setFont(this.majorFont).setFill(this.majorStroke.color);
+      }).setFont(this.majorFont).setFill(this.textColor);
 
       // STEP CIRCLE //
       this.radiusStep = Math.round((this.outerRadius - this.innerRadius) / this.radiusSteps);
@@ -294,7 +297,7 @@ define([
           y: this.nodeCenter.y + 7,
           align: "middle",
           text: text
-        }).setFont(textFont || this.majorFont).setFill(textFill || this.majorStroke.color);
+        }).setFont(textFont || this.majorFont).setFill(textFill || this.textColor);
       }
     },
 
@@ -320,8 +323,8 @@ define([
         x2: this.legendSize.x + this.legendSize.w,
         y2: this.legendSize.y - (this.legendSize.h * 0.5),
         colors: [
-          {offset: 0.0, color: this.fromFillColor},
-          {offset: 1.0, color: this.toFillColor}
+          { offset: 0.0, color: this.fromFillColor },
+          { offset: 1.0, color: this.toFillColor }
         ]
       });
 
@@ -331,7 +334,7 @@ define([
         y: this.legendSize.y - (this.legendSize.h * 0.5) + 3,
         align: "middle",
         text: "Frequency"
-      }).setFont(this.minorFont).setFill(this.majorStroke.color);
+      }).setFont(this.minorFont).setFill(this.textColor);
 
       // MIN VALUE //
       this.surface.createText({
@@ -339,31 +342,31 @@ define([
         y: this.legendSize.y + this.legendSize.h + 3,
         align: "start",
         text: "0"
-      }).setFont(this.minorFont).setFill(this.majorStroke.color);
+      }).setFont(this.minorFont).setFill(this.textColor);
 
       // MAX VALUE //
       this.surface.createText({
         x: this.legendSize.x + this.legendSize.w,
         y: this.legendSize.y + this.legendSize.h + 3,
         align: "end",
-        text: number.format(maxFrequency, {places: 0}) || "???"
-      }).setFont(this.minorFont).setFill(this.majorStroke.color);
+        text: number.format(maxFrequency, { places: 0 }) || "???"
+      }).setFont(this.minorFont).setFill(this.textColor);
 
       // MAX DISTANCE //
       this.surface.createText({
         x: 2,
         y: this.nodeBox.h - 2,
         align: "start",
-        text: "Distance: " + number.format(maxDistance, {places: 0}) + " m"
-      }).setFont(this.minorFont).setFill(this.majorStroke.color);
+        text: "Distance: " + number.format(maxDistance, { places: 0 }) + " m"
+      }).setFont(this.minorFont).setFill(this.textColor);
 
       // FEATURE COUNT //
       this.surface.createText({
         x: 2,
         y: this.nodeBox.h - 17,
         align: "start",
-        text: "Count: " + number.format(featureCount, {places: 0})
-      }).setFont(this.minorFont).setFill(this.majorStroke.color);
+        text: "Count: " + number.format(featureCount, { places: 0 })
+      }).setFont(this.minorFont).setFill(this.textColor);
 
       /*// DISTANCE LABELS //
        for (var radius = (this.innerRadius + this.radiusStep); radius < this.outerRadius; radius += this.radiusStep) {
@@ -407,7 +410,7 @@ define([
         y: labelPnt.y + 4,
         align: "middle",
         text: this._azimuthToLabel(azimuth)
-      }).setFont(isMajorLine ? this.majorFont : this.minorFont).setFill(this.majorStroke.color);
+      }).setFont(isMajorLine ? this.majorFont : this.minorFont).setFill(this.textColor);
 
       return azimuthLine;
     },
@@ -438,13 +441,17 @@ define([
           .lineTo(corner4)
           .arcTo(fromLength, fromLength, this._aziToRadians(toAzimuth), false, false, corner1)
           .closePath()
-          .setStroke(stroke || this.minorStroke).setFill(fill || this.minorStroke.color);
+          .setFill(fill || this.minorStroke.color);
+          //.setStroke(stroke || this.minorStroke);
 
       slice.on(mouse.enter, lang.hitch(this, function (evt) {
-        slice.setStroke(lang.mixin({}, stroke, { color: new Color(this.highlightStrokeColor), width: 3 })).moveToFront();
-        this.updateCenterText(number.format(frequency, {places: 0}));
+
+        slice.setStroke(lang.mixin({}, stroke, { color: new Color(this.highlightStrokeColor), width: 2.5 })).moveToFront();
+        this.updateCenterText(number.format(frequency, { places: 0 }));
+
         on.once(evt.target, mouse.leave, lang.hitch(this, function () {
-          slice.setStroke(stroke);
+          //slice.setStroke(stroke);
+          slice.setStroke();
           this.updateCenterText();
         }));
 

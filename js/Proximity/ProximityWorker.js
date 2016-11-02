@@ -38,12 +38,12 @@
   /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  */
 
   Number.prototype.toRad = function () {
-    return this * Math.PI / 180;
+    return ( this * Math.PI / 180.0);
   };
 
   // JG: RETURN AZIMUTH AS 0-360 //
   Number.prototype.toDeg = function () {
-    var deg = (this * 180 / Math.PI);
+    var deg = (this * 180.0 / Math.PI);
     if(deg < 0.0) {
       deg += 360.0;
     }
@@ -115,7 +115,6 @@
   if(!self.__mutable) {
     self.addEventListener('message', main, false);
   }
-
   self.__mutable = true;
 
 })(self);
