@@ -333,7 +333,7 @@ define([
         x: this.legendSize.x + (this.legendSize.w * 0.5),
         y: this.legendSize.y - (this.legendSize.h * 0.5) + 3,
         align: "middle",
-        text: "Frequency"
+        text: "Sector Count"
       }).setFont(this.minorFont).setFill(this.textColor);
 
       // MIN VALUE //
@@ -365,7 +365,7 @@ define([
         x: 2,
         y: this.nodeBox.h - 17,
         align: "start",
-        text: "Count: " + number.format(featureCount, { places: 0 })
+        text: "Total Count: " + number.format(featureCount, { places: 0 })
       }).setFont(this.minorFont).setFill(this.textColor);
 
       /*// DISTANCE LABELS //

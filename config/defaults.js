@@ -2,9 +2,9 @@ define({
   "appid": "",
   "webmap": "e9dd57dc927344b2937f33e9df5b3d8c",
   "oauthappid": null,
-  "proxyurl": "../../proxy/DotNet/proxy.ashx",
+  "proxyurl": "//maps.esri.com/AGSJS_Demos/proxy/DotNet/proxy.ashx",
   "bingmapskey": "",
-  "sharinghost": location.protocol + "//" + "www.arcgis.com",
+  "sharinghost":  "//www.arcgis.com",
   "queryForOrg": true,
   "units": null
 });

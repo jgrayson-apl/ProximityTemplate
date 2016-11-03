@@ -1,4 +1,6 @@
-html, body {
+html,
+body,
+#mapPane {
   width       : 100%;
   height      : 100%;
   margin      : 0;
@@ -6,136 +8,47 @@ html, body {
   font-family : Helvetica, "Trebuchet MS", "Segoe UI", sans-serif;
 }
 
-#mainContainer {
-  width  : 100%;
-  height : 100%;
+.esriSimpleSliderTL {
+  top  : 60px;
+  left : 15px;
 }
 
-#mainContainer .dijitContentPane {
-  border : none !important;
-}
-
-#optionsContainer {
-  width : 25%;
-}
-
-#topOptionsPane {
-  height : 300px;
-}
-
-#titleNode {
-  font-size     : x-large;
-  border-bottom : solid 2px gray;
-}
-
-#descriptionNode {
-  margin    : 15px;
-  font-size : 0.9em;
-  color     : #555;
-}
-
-#mapPane {
-  padding : 0;
-}
-
-
-#pan-button-pane {
+#proximity-pane {
+  z-index          : 99;
   position         : absolute;
-  top              : 10px;
-  left             : 90px;
-  z-index          : 50;
-  padding          : 5px;
-}
-
-#legendPane {
-  position         : absolute;
-  top              : 60px;
-  left             : 20px;
-  z-index          : 50;
-  min-width        : 150px;
-  padding          : 20px;
+  bottom           : 15px;
+  left             : 15px;
+  padding          : 10px;
   background-color : white;
-  border           : solid 1px silver;
   box-shadow       : 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-#layerToggleNode {
-  padding     : 10px 10px 10px 0;
-  font-weight : bolder;
-}
-
-.esriLegendService {
-  margin-left : 20px;
-}
-
-.esriLegendLayer {
-  margin-left : 10px;
-}
-
-.parameterPane {
-  border      : solid 1px silver;
-  margin      : 10px;
-  padding     : 5px;
-  font-weight : bolder;
-}
-
-.parameterDetails {
-  margin    : 5px;
-  padding   : 5px;
-  font-size : 0.75em;
-  color     : #999;
-}
-
-#basemapPane {
-  position : absolute;
-  left     : 220px;
-  top      : 20px;
-  z-Index  : 100;
-}
-
-/*#proximityChartPane {
-  position      : absolute;
-  left          : 20px;
-  top           : 60px;
-  z-Index       : 99;
-  border        : solid 1px silver;
-  box-shadow    : 0 0 6px gray;
-}*/
-
 #proximityChartNode {
-  width            : 100%;
-  height           : 300px;
-  margin           : 0 auto 0 auto;
+  width  : 400px;
+  height : 300px;
+  margin : 0 auto 0 auto;
+}
+
+#titleNode {
+  z-index          : 99;
+  position         : absolute;
+  top              : 5px;
+  left             : 5px;
+  font-size        : x-large;
+  padding          : 10px;
   background-color : white;
+  box-shadow       : 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.streetView {
-  width  : 350px;
-  height : 350px;
+#pan-button-pane {
+  position : absolute;
+  top      : 56px;
+  left     : 90px;
+  z-index  : 50;
 }
 
-.streetView-error {
-  width            : 500px;
-  height           : 60px;
-  padding          : 30px;
-  background-color : rgba(255, 255, 255, 0.5);
-  color            : darkred;
-  font-size        : 1.5em;
-  font-weight      : bolder;
-}
-
-.messages {
-  min-width  : 400px;
-  min-height : 200px;
-}
-
-.message-info {
-  padding   : 5px;
-  font-size : 2em;
-}
-
-.message-action {
-  padding    : 3px;
-  color      : gray;
-  font-style : italic;
+.aplPanRoam .dijitButtonNode {
+  background   : #fff !important;
+  border-color : #666 !important;
+  box-shadow   : 0 1px 2px rgba(0, 0, 0, 0.3);
 }

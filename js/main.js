@@ -17,10 +17,6 @@ define([
   "put-selector/put",
   "esri/config",
   "esri/arcgis/utils",
-  "esri/SnappingManager",
-  "esri/dijit/Scalebar",
-  "esri/dijit/Legend",
-  "esri/dijit/BasemapGallery",
   "esri/dijit/OverviewMap",
   "esri/symbols/SimpleMarkerSymbol",
   "esri/symbols/SimpleLineSymbol",
@@ -36,8 +32,7 @@ define([
   "application/Proximity/ProximityIndex",
   "widgets/PanRoam"
 ], function (ready, declare, lang, array, on, dom, domClass, domGeom, keys, Color, colors, gfx,
-             registry, Dialog, query, put,
-             esriConfig, arcgisUtils, SnappingManager, Scalebar, Legend, BasemapGallery, OverviewMap,
+             registry, Dialog, query, put, esriConfig, arcgisUtils, OverviewMap,
              SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Graphic, Point, Circle, webMercatorUtils, LinearUnit, Units,
              esriBundle, ProximityChart, ProximityIndex, PanRoam) {
 
@@ -59,7 +54,6 @@ define([
           ignorePopups: true,
           mapOptions: {
             zoom: 16,
-            scalebarUnit: "dual",
             sliderOrientation: "horizontal"
           },
           bingMapsKey: this.bingmapskey
@@ -78,36 +72,14 @@ define([
           var panRoamBtn = new PanRoam({ map: this.map }, "pan-button-node");
           panRoamBtn.startup();
 
-          // TITLE AND DESCRIPTION //
+          // TITLE //
           dom.byId('titleNode').innerHTML = this.item.title || "[No Title]";
-          dom.byId('descriptionNode').innerHTML = this.item.description || "[No Description]";
 
           // DEFAULT SYMBOLS //
           //this.pointSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CROSS, 24, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color(Color.named.red), 3), new Color(dojo.Color.named.green));
           //this.lineSymbol = new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color(Color.named.darkred), 3);
           this.polySymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color(Color.named.red), 5), new Color(Color.named.yellow.concat(0.0)));
           this.centerSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CROSS, 24, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color(Color.named.red), 3), new Color(dojo.Color.named.green));
-
-          // SCALEBAR //
-          var scalebar = new Scalebar({
-            map: this.map,
-            attachTo: "bottom-left",
-            scalebarUnit: "dual"
-          });
-
-          // LEGEND //
-         /* var legend = new Legend({
-            map: this.map,
-            layerInfos: arcgisUtils.getLegendLayers(response)
-          }, "legendNode");
-          legend.startup();*/
-
-          // BASEMAP GALLERY //
-         /* var basemapGallery = new BasemapGallery({
-            showArcGISBasemaps: true,
-            map: this.map
-          }, "basemapGalleryNode");
-          basemapGallery.startup();*/
 
           // OVERVIEW MAP //
           this.overviewMap = new OverviewMap({
@@ -125,19 +97,9 @@ define([
             // TARGET LAYER //
             var targetLayer = this.getMapLayer(this.webmap, this.targetLayerName);
 
-            // PROXIMITY PARAMETERS //
-            var proximityParams = {
-              source: this.map,
-              targets: targetLayer
-            };
 
             // PROXIMITY CHART //
             this.proximityChart = new ProximityChart({}, "proximityChartNode");
-            //this.proximityChart.on("inner-circle-click", lang.hitch(this, function () {
-            //  /**
-            //   *
-            //   */
-            //}));
 
             // PROXIMITY INDEX //
             this.proximityIndex = new ProximityIndex();
@@ -163,24 +125,24 @@ define([
               }
 
               // CIRCLE //
-              var searchCircle = new Circle(evt.source, {
+              /*var searchCircle = new Circle(evt.source, {
                 radius: (evt.maxDistanceMeters * 0.5),
                 geodesic: true
-              });
-              if(!this.searchCircleGraphic) {
+              });*/
+              /*if(!this.searchCircleGraphic) {
                 this.searchCircleGraphic = new Graphic(searchCircle, this.polySymbol);
                 this.overviewMap.overviewMap.graphics.add(this.searchCircleGraphic);
               } else {
                 this.searchCircleGraphic.setGeometry(searchCircle);
-              }
+              }*/
 
               // EXTENT //
-              if(!this.searchExtentGraphic) {
+              /*if(!this.searchExtentGraphic) {
                 this.searchExtentGraphic = new Graphic(evt.searchExtent, this.polySymbol);
                 this.overviewMap.overviewMap.graphics.add(this.searchExtentGraphic);
               } else {
                 this.searchExtentGraphic.setGeometry(evt.searchExtent);
-              }
+              }*/
 
               // DISPLAY PROXIMITY CHART //
               this.proximityChart.update(evt.nearTable, evt.maxDistanceMeters);
