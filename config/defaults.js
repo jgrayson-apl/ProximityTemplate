@@ -1,8 +1,8 @@
 define({
   "appid": "",
-  "webmap": "e9dd57dc927344b2937f33e9df5b3d8c",
+  "webmap": "5ae5597e6d704e80aa49d56bcee72d1a",
   "oauthappid": null,
-  "proxyurl": "//maps.esri.com/AGSJS_Demos/proxy/DotNet/proxy.ashx",
+  "proxyurl": "//maps2.esri.com/proxy/DotNet/proxy.ashx",
   "bingmapskey": "",
   "sharinghost":  "//www.arcgis.com",
   "queryForOrg": true,

@@ -53,7 +53,7 @@ define([
         arcgisUtils.createMap(itemInfoOrWebmapId, "mapPane", {
           ignorePopups: true,
           mapOptions: {
-            zoom: 16,
+            //zoom: 16,
             sliderOrientation: "horizontal"
           },
           bingMapsKey: this.bingmapskey
@@ -86,7 +86,8 @@ define([
             map: this.map,
             visible: true,
             color: "red",
-            opacity: 0.1
+            opacity: 0.1,
+            attachTo: "bottom-left"
           });
           this.overviewMap.startup();
 
@@ -126,23 +127,23 @@ define([
 
               // CIRCLE //
               /*var searchCircle = new Circle(evt.source, {
-                radius: (evt.maxDistanceMeters * 0.5),
-                geodesic: true
-              });*/
+               radius: (evt.maxDistanceMeters * 0.5),
+               geodesic: true
+               });*/
               /*if(!this.searchCircleGraphic) {
-                this.searchCircleGraphic = new Graphic(searchCircle, this.polySymbol);
-                this.overviewMap.overviewMap.graphics.add(this.searchCircleGraphic);
-              } else {
-                this.searchCircleGraphic.setGeometry(searchCircle);
-              }*/
+               this.searchCircleGraphic = new Graphic(searchCircle, this.polySymbol);
+               this.overviewMap.overviewMap.graphics.add(this.searchCircleGraphic);
+               } else {
+               this.searchCircleGraphic.setGeometry(searchCircle);
+               }*/
 
               // EXTENT //
               /*if(!this.searchExtentGraphic) {
-                this.searchExtentGraphic = new Graphic(evt.searchExtent, this.polySymbol);
-                this.overviewMap.overviewMap.graphics.add(this.searchExtentGraphic);
-              } else {
-                this.searchExtentGraphic.setGeometry(evt.searchExtent);
-              }*/
+               this.searchExtentGraphic = new Graphic(evt.searchExtent, this.polySymbol);
+               this.overviewMap.overviewMap.graphics.add(this.searchExtentGraphic);
+               } else {
+               this.searchExtentGraphic.setGeometry(evt.searchExtent);
+               }*/
 
               // DISPLAY PROXIMITY CHART //
               this.proximityChart.update(evt.nearTable, evt.maxDistanceMeters);
